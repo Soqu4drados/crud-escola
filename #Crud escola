@@ -1,0 +1,57 @@
+import mysql.connector
+
+conexao = mysql.connector.connect(
+    host='localhost',
+    user='root',
+    password='rwby',
+    database='escola',
+)
+
+cursor = conexao.cursor()  # Definindo o cursor antes do uso
+
+ #Create
+#idAluno = 3
+#nome_al = "pedro"
+#idade_al = 12
+#nota_pri = 7
+#nota_seg = 6.5
+#nome_P = "Mendes"
+#comando = f'INSERT INTO aluno (idAluno, nome_al, idade_al, nota_pri, nota_seg, nome_P) VALUES ({idAluno}, "{nome_al}", {idade_al}, {nota_pri}, {nota_seg}, "{nome_P}")'
+#cursor.execute(comando)
+#conexao.commit()
+
+# Update
+idAluno = 3
+nome_al = "pedro"
+idade_al = 13
+nota_pri = 7
+nota_seg = 6.5
+nome_P = "Mendes"
+comando =  f'UPDATE aluno SET idade_al = {idade_al} WHERE idAluno = {idAluno}'
+cursor.execute(comando)
+conexao.commit()    
+
+# Read
+comando = 'SELECT * FROM escola.aluno'
+cursor.execute(comando)
+resultado = cursor.fetchall()
+print(resultado)
+
+
+# Delete
+idAluno = 1  # Supondo que você queira deletar o aluno com idAluno = 4
+comando = f'DELETE FROM aluno WHERE idAluno = {idAluno}'
+cursor.execute(comando)
+conexao.commit()
+
+# Read (após o DELETE)
+comando = 'SELECT * FROM escola.aluno'
+cursor.execute(comando)
+resultado = cursor.fetchall()
+print("Dados após o DELETE:", resultado)
+
+cursor.close()
+conexao.close()
+
+
+
